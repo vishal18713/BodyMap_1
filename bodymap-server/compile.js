@@ -3,6 +3,7 @@ const fs = require('fs');
 const contractToCompileName = 'bodymap.sol';
 const contractPath = path.resolve(__dirname, 'contracts', contractToCompileName);
 const contractSource  = fs.readFileSync(contractPath,'utf-8');
+const solc = require('solc');
 
 var input = 
 {
