@@ -17,3 +17,5 @@ console.log(compiledContracts);
 const compiledContract = compiledContracts.contracts[contractToCompileName]["BodyMap"];
 console.log(compiledContract);
 module.exports = {compiledContract};
+
+
