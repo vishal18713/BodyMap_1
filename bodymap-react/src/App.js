@@ -56,7 +56,17 @@ function App() {
     const encryptedBodyMapBasic = crypto.AES.encrypt(bodyMapBasicString,passwordClearTextBasic).toString();
     const encryptedBodyMapTailor = crypto.AES.encrypt(bodyMapTailorString,passwordClearTextTailor).toString();
     await deployedContract.methods.setBodyMaps(passwordClearText,encryptedBodyMapBasic,encryptedBodyMapTailor).send({from:accounts[0],gas:5000000});
-    
+  }
+
+  async function loadBodyMaps(){
+    let newBodyMapBasicEncrypted = await deployContract.methods.basicBodyMap().call();
+    let newBodyMapTailorEncrypted = await deployContract.methods.tailorBodyMap().call();
+
+    let bodyMapBasicBytes = crypto.AES.decrypt(newBodyMapBasicEncrypted,passwordClearTextBasic);
+    let bodyMapTailorBytes = crypto.AES.decrypt(newBodyMapTailorEncrypted,passwordClearTextTailor);
+    setBodyMapBasic((JSON.parse(bodyMapBasicBytes.toString(crypto.AES.utf8))));
+    setBodyMapTailor((JSON.parse(bodyMapTailorBytes.toString(crypto.AES.utf8))));
+
 
   }
 
@@ -96,7 +106,9 @@ function App() {
         </div>
       ))}
       <br/>
-      <button onClick={updateBodyMaps}></button>
+      <button onClick={updateBodyMaps}>update Body maps</button>
+      <br/>
+      <button onClick={loadBodyMaps}>Load Body maps</button>
 
       
     </div>
