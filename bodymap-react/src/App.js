@@ -5,6 +5,7 @@ window.ethereum.request({ method: 'eth_requestAccounts' });
 const web3 = new Web3(window.ethereum);
 const fetch = require('node-fetch');
 const crypto = require('crypto-js');
+//vishal
 
 function App() {
   const[passwordClearText,setPasswordClearText] = useState('');
